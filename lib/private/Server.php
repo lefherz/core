@@ -525,7 +525,8 @@ class Server extends ServerContainer implements IServerContainer, IServiceLoader
 			$factory = new \OC\DB\ConnectionFactory($systemConfig);
 			$type = $systemConfig->getValue('dbtype', 'sqlite');
 			if (!$factory->isValidType($type)) {
-				throw new \OC\DatabaseException('Invalid database type');
+				throw new \OC\DatabaseException('Invalid database type: "'.$type.'" - only mysql,'\
+								' sqlite, sqlite3, pgsql, or are oci supported. ');
 			}
 			$connectionParams = $factory->createConnectionParams();
 			$connection = $factory->getConnection($type, $connectionParams);
